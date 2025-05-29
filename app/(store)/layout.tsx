@@ -10,6 +10,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import Header from "@/components/Header";
+import { SanityLive } from "@/sanity/lib/live";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -38,6 +39,8 @@ export default function RootLayout({
             <Header />
             {children}
           </main>
+
+          <SanityLive />
         </body>
       </html>
     </ClerkProvider>
