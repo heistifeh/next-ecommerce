@@ -50,6 +50,7 @@ const ProductThumb = ({ product }: { product: Product }) => {
             : "Price not available"}
         </p>
       </div>
+     
     </Link>
   );
 };

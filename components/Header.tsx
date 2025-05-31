@@ -5,10 +5,14 @@ import Form from "next/form";
 import React from "react";
 import { PackageIcon, TrolleyIcon } from "@sanity/icons";
 import { Button } from "./ui/button";
+import useBasketStore from "@/store";
 
 function Header() {
   const { user } = useUser();
   console.log("User data:", user);
+  const itemCount = useBasketStore((state) =>
+    state.items.reduce((total, item) => total + item.quantity, 0)
+  );
 
   const createClerkPaskey = async () => {
     try {
@@ -48,6 +52,11 @@ function Header() {
           >
             <TrolleyIcon className="w-6 h-6" />
             {/* item count from global state */}
+            {itemCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                {itemCount}
+              </span>
+            )}
             <span>My Cart</span>
           </Link>
 
@@ -71,7 +80,7 @@ function Header() {
                 </div>
               </div>
             ) : (
-              <SignInButton mode="modal"/>
+              <SignInButton mode="modal" />
             )}
             {user?.passkeys.length === 0 && (
               <button
