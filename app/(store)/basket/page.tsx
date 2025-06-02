@@ -1,9 +1,10 @@
 "use client";
+import { createCheckoutSession } from "@/actions/createCheckoutSession";
 import AddToBasketButton from "@/components/ui/AddToBasketButton";
 import Loader from "@/components/ui/Loader";
 import { imageUrl } from "@/lib/imageUrl";
 import useBasketStore from "@/store";
-import { useAuth, useUser } from "@clerk/nextjs";
+import { SignInButton, useAuth, useUser } from "@clerk/nextjs";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,6 +38,29 @@ const BasketPage = () => {
       </div>
     );
   }
+  const handleCheckout = async () => {
+    if (!isSignedIn) return;
+    setIsLoading(true);
+
+    try {
+      const metadata = {
+        orderNumber: crypto.randomUUID(), // example: ab3lks-as1lks-k5sljs-lksj0f
+        customerName: user?.fullName ?? "Unknown",
+        customerEmail: user?.emailAddresses[0].emailAddress ?? "Unknown",
+        clerkUserId: user?.id || "Unknown",
+      };
+
+      const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
+
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      }
+    } catch (error) {
+      console.error("Error creating checkout session:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="container mx-auto p-4 max-w-6xl">
@@ -71,15 +95,18 @@ const BasketPage = () => {
                     {item.product.name}
                   </h2>
                   <p className="text-sm sm:text-base">
-                    Price: ₦
+                    Price: $
                     {((item.product.price ?? 0) * item.quantity).toFixed(2)}
                   </p>
                 </div>
               </div>
+              <div className="flex items-center ml-4 flex-shrink-0">
+                <AddToBasketButton product={item.product} />
+              </div>
             </div>
           ))}
         </div>
-        
+
         <div className="w-full lg:w-80 lg:sticky lg:top-4 h-fit bg-white p-6 border rounded order-first lg:order-last fixed bottom-0 left-0 lg:left-auto">
           <h3 className="text-xl font-semibold">Order Summary</h3>
           <div className="mt-4 space-y-2">
@@ -96,6 +123,23 @@ const BasketPage = () => {
               </span>
             </p>
           </div>
+
+          {/* check is signed in */}
+          {isSignedIn ? (
+            <button
+              onClick={handleCheckout}
+              disabled={isLoading}
+              className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
+            >
+              {isLoading ? "Processing..." : "Checkout"}
+            </button>
+          ) : (
+            <SignInButton mode="modal">
+              <button className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Sign in to Checkout
+              </button>
+            </SignInButton>
+          )}
         </div>
 
         <div className="h-64 lg:h-0">
