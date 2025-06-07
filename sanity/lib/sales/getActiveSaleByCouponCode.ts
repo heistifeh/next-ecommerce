@@ -19,7 +19,7 @@ export const getActiveSaleByCouponCode = async (couponCode: CouponCode) => {
       }, // Pass the couponCode as a query parameter
     });
 
-    return activeSale?.data ?? null;
+    return activeSale?.data;
   } catch (error) {
     console.error("Error fetching active sale by coupon code:", error);
     return null;
