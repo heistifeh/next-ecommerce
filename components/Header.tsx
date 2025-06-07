@@ -30,7 +30,7 @@ function Header() {
           href="/"
           className="text-2xl font-bold text-gray-800 hover:opacity-50 cursor-pointer mx-auto sm:mx-0"
         >
-          TeeStores
+          Cartify
         </Link>
 
         <Form

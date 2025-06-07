@@ -6,14 +6,13 @@ import { getAllProducts } from "@/sanity/lib/products/getAllProducts";
 export default async function Home() {
   const products = await getAllProducts();
   const categories = await getAllCategories();
-  console.log(products, categories, 'finally here');
-  
+  console.log(products, categories, "finally here");
+
   return (
     <>
       <BlackFridayBanner />
 
-      <div>
-        
+      <div className="mx-auto px-4">
         <ProductsView products={products} categories={categories} />
       </div>
     </>

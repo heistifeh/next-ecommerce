@@ -17,7 +17,7 @@ const ProductsView = ({ products, categories }: ProductsViewProps) => {
       </div>
 
       {/* products */}
-      <div className="flex-1">
+      <div className="flex-1 px-4 sm:px-8 py-4">
         <div>
           <ProductsGrid products={products} />
 

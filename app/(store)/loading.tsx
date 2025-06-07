@@ -1,11 +1,8 @@
-
-import Loader from '@/components/ui/Loader'
-import React from 'react'
+import Loader from "@/components/ui/Loader";
+import React from "react";
 
 function loading() {
-  return (
-    <Loader/>
-  )
+  return <Loader />;
 }
 
-export default loading
+export default loading;
