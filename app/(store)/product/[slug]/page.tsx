@@ -5,6 +5,8 @@ import { PortableText } from "next-sanity";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-static"; // This will ensure the page is statically generated at build time
+export const revalidate = 600; // Revalidate every 600 seconds
 async function ProductPage({
   params,
 }: {
@@ -14,6 +16,13 @@ async function ProductPage({
 }) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
+
+  console.log(
+    crypto.randomUUID().slice(0, 8) +
+      " >>>Rerendered the product page cache for slug: " +
+      slug
+  );
+
   console.log("Product data:", product);
   if (!product) {
     return notFound();
