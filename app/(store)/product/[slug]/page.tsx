@@ -8,12 +8,7 @@ import { notFound } from "next/navigation";
 export const dynamic = "force-static"; // This will ensure the page is statically generated at build time
 export const revalidate = 600; // Revalidate every 600 seconds
 
-type PageProps = {
-  params: {
-    slug: string;
-  };
-};
-async function ProductPage({ params }: PageProps) {
+async function ProductPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const product = await getProductBySlug(slug);
 
