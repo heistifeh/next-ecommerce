@@ -5,11 +5,9 @@ import { PortableText } from "next-sanity";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-export const dynamic = "force-static"; // This will ensure the page is statically generated at build time
-export const revalidate = 600; // Revalidate every 600 seconds
-
-async function ProductPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export type Params = Promise<{ slug: string }>;
+async function ProductPage(props: { params: Params }) {
+  const { slug } = await props.params;
   const product = await getProductBySlug(slug);
 
   console.log(

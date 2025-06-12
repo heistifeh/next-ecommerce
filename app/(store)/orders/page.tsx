@@ -6,8 +6,10 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 
 async function Orders() {
-  const userId = await auth();
-  console.log("userId:", userId);
+  const authResult = await auth();
+  // console.log("authResult:", authResult);
+
+  const userId = authResult?.userId;
 
   if (!userId) {
     return redirect("/");
