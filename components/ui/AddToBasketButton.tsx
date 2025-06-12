@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
 import { Product } from "@/sanity.types";
 import useBasketStore from "@/store";
 

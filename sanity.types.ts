@@ -284,7 +284,7 @@ export type SanityImageMetadata = {
 
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Sale | Order | Product | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./sanity/lib/orders/getMyOrders.tsx
+// Source: ./sanity/lib/orders/getMyOrders.ts
 // Variable: MY_ORDERS_QUERY
 // Query: *[_type == "order" && clerkUserId == $userId] | order(orderDate desc) {      ...,      products[]{        ...,        product->      }    }
 export type MY_ORDERS_QUERYResult = Array<{

@@ -1,7 +1,6 @@
 "use client";
 import { createCheckoutSession } from "@/actions/createCheckoutSession";
 import AddToBasketButton from "@/components/ui/AddToBasketButton";
-import Loader from "@/components/ui/Loader";
 import { imageUrl } from "@/lib/imageUrl";
 import useBasketStore from "@/store";
 import { SignInButton, useAuth, useUser } from "@clerk/nextjs";
