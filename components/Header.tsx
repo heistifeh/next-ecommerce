@@ -56,7 +56,7 @@ function Header() {
                 {itemCount}
               </span>
             )}
-            <span>My Cart</span>
+            <span>My Basket</span>
           </Link>
 
           {/* user profile */}
