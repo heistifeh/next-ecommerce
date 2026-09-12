@@ -44,7 +44,7 @@ function Header() {
           />
         </Form>
         {/* my basket */}
-        <div className="flex items-center space-x-4 mt-4 sm:mt-0 flex-1 sm:flex-none">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-4 mt-4 sm:mt-0 flex-1 sm:flex-none">
           <Link
             href="/basket"
             className="flex-1 relative flex items-center justify-center sm:justify-start sm: sm:flex-none space-x-2 bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
@@ -84,7 +84,7 @@ function Header() {
             {user?.passkeys.length === 0 && (
               <button
                 onClick={createClerkPaskey}
-                className="bg-white hover:bg-gray-700 hover:tex-white animate-pulse text-gray-500 font-bold py-2 px-4 rounded border-gray-300 border text-sm"
+                className="shrink-0 whitespace-nowrap bg-white hover:bg-gray-700 hover:tex-white animate-pulse text-gray-500 font-bold py-2 px-4 rounded border-gray-300 border text-sm"
               >
                  Create Passkey
               </button>
